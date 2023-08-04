@@ -1955,6 +1955,13 @@ export default {
       this.forest.selectedNodeMap[node.id] = true
     },
 
+    setValue(node) {
+      this.forest.selectedNodeIds = node
+      node.map((e)=> {
+        this.forest.selectedNodeMap[e] = true
+      })
+    },
+
     removeValue(node) {
       removeFromArray(this.forest.selectedNodeIds, node.id)
       delete this.forest.selectedNodeMap[node.id]

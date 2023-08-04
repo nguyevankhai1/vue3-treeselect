@@ -6418,6 +6418,14 @@ var instanceId = 0;
       this.forest.selectedNodeIds.push(node.id);
       this.forest.selectedNodeMap[node.id] = true;
     },
+    setValue: function setValue(node) {
+      var _this23 = this;
+
+      this.forest.selectedNodeIds = node;
+      node.map(function (e) {
+        _this23.forest.selectedNodeMap[e] = true;
+      });
+    },
     removeValue: function removeValue(node) {
       removeFromArray(this.forest.selectedNodeIds, node.id);
       delete this.forest.selectedNodeMap[node.id];
