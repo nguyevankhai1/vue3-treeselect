@@ -1991,13 +1991,6 @@ export default {
   created() {
     this.verifyProps()
     this.resetFlags()
-    const unwatch = this.$watch(
-      'modelValue',
-      (newValue) => {
-        unwatch()
-        this.setValue(newValue)
-      },
-    )
   },
 
   mounted() {

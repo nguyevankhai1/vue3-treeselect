@@ -6585,15 +6585,8 @@ module.exports =
           }
         },
         created: function created() {
-          var _this24 = this;
-
           this.verifyProps();
           this.resetFlags();
-          var unwatch = this.$watch('modelValue', function (newValue) {
-            unwatch();
-
-            _this24.setValue(newValue);
-          });
         },
         mounted: function mounted() {
           if (this.autoFocus) this.focusInput();
