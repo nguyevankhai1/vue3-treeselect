@@ -322,7 +322,7 @@ export default {
     instanceId: {
       // Add two trailing "$" to distinguish from explictly specified ids.
       default: () => `${instanceId++}$$`,
-      type: [ String, Number ],
+      type: [String, Number],
     },
 
     /**
@@ -374,7 +374,7 @@ export default {
      */
     matchKeys: {
       type: Array,
-      default: constant([ 'label' ]),
+      default: constant(['label']),
     },
 
     /**
@@ -449,7 +449,7 @@ export default {
       type: String,
       default: 'auto',
       validator(value) {
-        const acceptableValues = [ 'auto', 'top', 'bottom', 'above', 'below' ]
+        const acceptableValues = ['auto', 'top', 'bottom', 'above', 'below']
         return includes(acceptableValues, value)
       },
     },
@@ -554,7 +554,7 @@ export default {
       type: String,
       default: ALL_CHILDREN,
       validator(value) {
-        const acceptableValues = [ ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS ]
+        const acceptableValues = [ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS]
         return includes(acceptableValues, value)
       },
     },
@@ -578,7 +578,7 @@ export default {
       type: String,
       default: ORDER_SELECTED,
       validator(value) {
-        const acceptableValues = [ ORDER_SELECTED, LEVEL, INDEX ]
+        const acceptableValues = [ORDER_SELECTED, LEVEL, INDEX]
         return includes(acceptableValues, value)
       },
     },
@@ -612,7 +612,7 @@ export default {
       type: String,
       default: BRANCH_PRIORITY,
       validator(value) {
-        const acceptableValues = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE ]
+        const acceptableValues = [ALL, BRANCH_PRIORITY, LEAF_PRIORITY, ALL_WITH_INDETERMINATE]
         return includes(acceptableValues, value)
       },
     },
@@ -633,7 +633,7 @@ export default {
      * z-index of the menu.
      */
     zIndex: {
-      type: [ Number, String ],
+      type: [Number, String],
       default: 999,
     },
   },
@@ -976,7 +976,7 @@ export default {
       // When the real data is loaded, we'll override this fake node.
 
       const raw = this.extractNodeFromValue(id)
-      const label = this.enhancedNormalizer(raw).label || `${id} (unknown)`
+      const label = this.enhancedNormalizer(raw).label || `${id}`
       const fallbackNode = {
         id,
         label,
@@ -988,7 +988,7 @@ export default {
         isBranch: false,
         isDisabled: false,
         isNew: false,
-        index: [ -1 ],
+        index: [-1],
         level: 0,
         raw,
       }
@@ -1003,10 +1003,10 @@ export default {
       if (this.valueFormat === 'id') {
         return this.multiple
           ? this.modelValue.slice()
-          : [ this.modelValue ]
+          : [this.modelValue]
       }
 
-      return (this.multiple ? this.modelValue : [ this.modelValue ])
+      return (this.multiple ? this.modelValue : [this.modelValue])
         .map(node => this.enhancedNormalizer(node))
         .map(node => node.id)
     },
@@ -1020,7 +1020,7 @@ export default {
 
       const valueArray = this.multiple
         ? Array.isArray(this.modelValue) ? this.modelValue : []
-        : this.modelValue ? [ this.modelValue ] : []
+        : this.modelValue ? [this.modelValue] : []
       const matched = find(
         valueArray,
         node => node && this.enhancedNormalizer(node).id === id,
@@ -1527,8 +1527,8 @@ export default {
 
     normalize(parentNode, nodes, prevNodeMap) {
       let normalizedOptions = nodes
-        .map(node => [ this.enhancedNormalizer(node), node ])
-        .map(([ node, raw ], index) => {
+        .map(node => [this.enhancedNormalizer(node), node])
+        .map(([node, raw], index) => {
           this.checkDuplication(node)
           this.verifyNodeShape(node)
 
@@ -1555,7 +1555,7 @@ export default {
           normalized.id = id;
           normalized.label = label;
           normalized.level = level;
-          normalized.ancestors = isRootNode ? [] : [ parentNode ].concat(parentNode.ancestors);
+          normalized.ancestors = isRootNode ? [] : [parentNode].concat(parentNode.ancestors);
           normalized.index = (isRootNode ? [] : parentNode.index).concat(index);
           normalized.parentNode = parentNode;
           normalized.lowerCased = lowerCased;
@@ -1593,13 +1593,13 @@ export default {
             //   ...createAsyncOptionsStates(),
             //   isLoaded,
             // })
-            normalized.childrenStates = {...createAsyncOptionsStates(),isLoaded}
-            
+            normalized.childrenStates = { ...createAsyncOptionsStates(), isLoaded }
+
             // this.$ set(normalized, 'isExpanded', typeof isDefaultExpanded === 'boolean'
             //   ? isDefaultExpanded
             //   : level < this.defaultExpandLevel)
             normalized.isExpanded = typeof isDefaultExpanded === 'boolean' ? isDefaultExpanded : level < this.defaultExpandLevel;
-            
+
             // this.$ set(normalized, 'hasMatchedDescendants', false)
             // this.$ set(normalized, 'hasDisabledDescendants', false)
             // this.$ set(normalized, 'isExpandedOnSearch', false)
@@ -1627,7 +1627,7 @@ export default {
             // this.$ set(normalized, 'children', isLoaded
             //   ? this.normalize(normalized, children, prevNodeMap)
             //   : [])
-            normalized.children = isLoaded ? this.normalize(normalized, children, prevNodeMap) :[];
+            normalized.children = isLoaded ? this.normalize(normalized, children, prevNodeMap) : [];
 
             if (isDefaultExpanded === true) normalized.ancestors.forEach(ancestor => {
               ancestor.isExpanded = true
@@ -1957,7 +1957,7 @@ export default {
 
     setValue(node) {
       this.forest.selectedNodeIds = node
-      node.map((e)=> {
+      node.map((e) => {
         this.forest.selectedNodeMap[e] = true
       })
     },
